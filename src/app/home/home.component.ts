@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { BlogService } from '../blog.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   //declare a dummy variable here
   public allBlogs = [
@@ -52,9 +53,21 @@ export class HomeComponent implements OnInit {
 
   ]
 
-  constructor() { }
+  constructor(public blogService:BlogService) { 
 
-  ngOnInit(): void {
+    console.log("Home component constructor is called");
+
+  }
+
+  ngOnInit() {
+
+    console.log("Home component onInit is called"); 
+
+  }
+  ngOnDestroy() {
+
+    console.log("Home component destroyed");
+
   }
 
 }
