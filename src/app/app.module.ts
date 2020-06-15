@@ -20,6 +20,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 //import statement for service
 import { BlogService } from './blog.service';
+import { BlogHttpService } from './blog-http.service';
 
 
 //decorators
@@ -49,7 +50,7 @@ import { BlogService } from './blog.service';
         ])
     
   ],
-  providers: [BlogService],
+  providers: [BlogService,BlogHttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
