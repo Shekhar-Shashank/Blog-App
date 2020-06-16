@@ -1,41 +1,83 @@
-import { Component, OnInit, ViewContainerRef, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { BlogService } from '../blog.service';
+import { BlogHttpService} from "../blog-http.service";
+import { Location } from '@angular/common';
+import { ToastrManager } from 'ng6-toastr-notifications';
+
+import { createUrlResolverWithoutPackagePrefix } from '@angular/compiler';
 
 @Component({
   selector: 'app-blog-view',
   templateUrl: './blog-view.component.html',
-  styleUrls: ['./blog-view.component.css']
+  styleUrls: ['./blog-view.component.css'],
+  providers: [Location]
 })
-export class BlogViewComponent implements OnInit,OnDestroy {
+export class BlogViewComponent implements OnInit {
 
+  //empty object
   public currentBlog;
 
-  constructor(private _route: ActivatedRoute, private router: Router, public blogService:BlogService) {
-
-    console.log("blog-view Constructor is called");
-
+  constructor(private _route: ActivatedRoute, private router: Router, public blogService:BlogService,public blogHttpService:BlogHttpService,public toastr: ToastrManager,private location: Location) {
+  
   }
 
 
   ngOnInit() {
-    console.log("blog view ngOnitcalled");
-    //getting the blog id from the route
+
     let myBlogId = this._route.snapshot.paramMap.get('blogId');
     console.log(myBlogId)
-    //this.currentBlog = this.blogService.getSingleBlog(myBlogId);
-    this.currentBlog = this.blogService.getSingleBlogInformation(myBlogId);
-    console.log(this.currentBlog);
+
+
+    //calling the function to get the blog with this blogId out of the overall array of blogs
+
+    this.blogHttpService.getSingleBlogInformation(myBlogId).subscribe(
+
+      data => {
+        console.log(data);
+        this.currentBlog = data["data"];
+      },
+      error => {
+        console.log("Some error occured");
+        console.log(error.errorMessage)
+      }
+
+    )
     
   }
 
-  ngOnDestroy() {
 
-    console.log("blog view destroyed");
-    
+  deleteThisBlog(): any {
+
+    this.blogHttpService.deleteBlog(this.currentBlog.blogId).subscribe(
+
+      data => {
+        console.log(data);
+        this.toastr.successToastr('Blog Deleted successfully', 'Success!');
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 1000)
+
+      },
+      error => {
+        console.log("some error occured");
+        console.log(error.errorMessage);
+        this.toastr.errorToastr('Some error occured', 'Error');
+      }
+
+
+    )
+
+
+
+
+  }// end delete this blog 
+
+  public goBackToPreviousPage(): any {
+
+    this.location.back();
 
   }
-
  
 
 }

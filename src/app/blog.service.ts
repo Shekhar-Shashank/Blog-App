@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class BlogService {
 
     //declare a dummy variable here
-    public allBlogs = [
+    public blogArray = [
       {
         "blogId": "1",
         "lastModified": "2017-10-20T12:20:47.854Z",
@@ -61,7 +61,7 @@ export class BlogService {
     //method to return all the blogs
     public getAllBlogs():any {
 
-      return this.allBlogs;
+      return this.blogArray;
 
     }
 
@@ -69,7 +69,7 @@ export class BlogService {
     public getSingleBlogInformation(currentBlogId): any {
       //using a for of loop here for type script
   
-      for(let blog of this.allBlogs){
+      for(let blog of this.blogArray){
         if(blog.blogId == currentBlogId){
           this.currentBlog = blog;
         }

@@ -16,7 +16,7 @@ import { catchError } from 'rxjs/operators';
 export class BlogHttpService {
 
   public allBlogs;
-  public currentBlog;
+  //public currentBlog;
   public baseUrl = 'https://blogapp.edwisor.com/api/v1/blogs';
   public authToken = 'NzlhZTQyZmU4NTFiY2QxZWQyNThjZjBhNDQ5OWQ2Y2QyNTkwMDY4YzdhNjg3MTFlNWFjYTNjNDEyZGI1NDljYzg0ZTk3NjdhOWQxNGE0OGQwY2ViOWFjMGQxZGE0N2ZiYmM3MGJkZmU4NmVhNDBlZTAxNGRiOTZkMWY2MGFhNjA2Mw==';
 
@@ -36,7 +36,7 @@ export class BlogHttpService {
   }
 
   //method to return all the blogs
-  public getAllBlogs(): any {
+  getAllBlogs(): any {
 
     let myResponse = this._http.get(this.baseUrl+'/all?authToken=' + this.authToken);
     console.log(myResponse);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogHttpService } from '../blog-http.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-blog-create',
@@ -9,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class BlogCreateComponent implements OnInit {
 
-  constructor(private blogHttpService: BlogHttpService, private _route: ActivatedRoute, private router: Router) { }
+  constructor(private blogHttpService: BlogHttpService, private _route: ActivatedRoute, private router: Router,public toastr: ToastrManager) { }
 
   public blogTitle: string;
   public blogBodyHtml: string;
@@ -38,10 +39,11 @@ export class BlogCreateComponent implements OnInit {
       data => {
         console.log("Blog Created");
         console.log(data);
-        alert("Blog posted successfully");
+        this.toastr.successToastr('Blog posted successfully', 'Success!');
+        
         setTimeout(()=>{
           this.router.navigate(['/blog',data.data.blogId]);
-        },1000)
+        }, 1000)
         
 
       },

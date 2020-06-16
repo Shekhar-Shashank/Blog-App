@@ -7,12 +7,13 @@ import { BlogHttpService } from '../blog-http.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
-  public allBlogs;
+  public allBlogs: any;
+  errorMessage: any;
 
 
-  constructor(public blogHttpService:BlogHttpService) { 
+  constructor(private blogService:BlogService,public blogHttpService:BlogHttpService) { 
 
     console.log("Home component constructor is called");
 
@@ -20,15 +21,28 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    console.log("Home component onInit is called"); 
-    this.allBlogs = this.blogHttpService.getAllBlogs();
-    console.log(this.allBlogs);
+    //this.allBlogs = this.blogHttpService.getAllBlogs();
+    //this.blogHttpService.getAllBlogs();
 
+
+    
+    
+    this.blogHttpService.getAllBlogs().subscribe(
+
+      data => {
+        console.log(data);
+        this.allBlogs = data["data"];
+        return this.allBlogs;
+      },
+      error => {
+        console.log("Some error occured");
+        console.log(error.errorMessage)
+      }
+
+    )
+    
   }
-  ngOnDestroy() {
 
-    console.log("Home component destroyed");
-
-  }
+  
 
 }
