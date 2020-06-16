@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 //importing http client to make the requests
 import{HttpClient, HttpErrorResponse} from '@angular/common/http';
 
-//import observable related
+//import observable
 @Injectable({
   providedIn: 'root'
 })
