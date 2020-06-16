@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormsModule }   from '@angular/forms';
+
 
 //router module used for setting up the application level route
 import {RouterModule,Routes} from '@angular/router';
@@ -21,6 +23,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 //import statement for service
 import { BlogService } from './blog.service';
 import { BlogHttpService } from './blog-http.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 //decorators
@@ -36,6 +39,8 @@ import { BlogHttpService } from './blog-http.service';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    FormsModule,
         //routerModule forRoot method to declare the possible routes in application
         RouterModule.forRoot([
           {path:'home',component:HomeComponent},
