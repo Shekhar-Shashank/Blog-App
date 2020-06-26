@@ -31,7 +31,7 @@ export class BlogViewComponent implements OnInit {
 
     //calling the function to get the blog with this blogId out of the overall array of blogs
 
-    this.blogHttpService.getSingleBlogInformation(myBlogId).subscribe(
+    this.blogHttpService.getSingleBlog(myBlogId).subscribe(
 
       data => {
         console.log(data);

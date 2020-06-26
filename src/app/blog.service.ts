@@ -6,8 +6,11 @@ import { Injectable } from '@angular/core';
 export class BlogService {
 
     //declare a dummy variable here
+    public foundBlog: { "blogId": string; "title": string; "description": string; "author": string; "body": string; "category": string; "tags": string[]; } | { "title": string; "description": string; "author": string; "body": string; "category": string; "tags": string[]; };
+
+ 
     public blogArray = [
-      {
+            {
         "blogId": "1",
         "lastModified": "2017-10-20T12:20:47.854Z",
         "created": "2017-10-20T12:20:47.854Z",
@@ -16,70 +19,62 @@ export class BlogService {
         "category": "Comedy",
         "isPublished": true,
         "views": 0,
-        "bodyHtml": "this is blog body",
+        "bodyHtml": "this is blog body ",
         "description": "this is blog 1 description",
-        "title": "This is a blog 1"
-      },
-      {
+        "title": "This is blog 1"
+        },
+          {
         "blogId": "2",
         "lastModified": "2017-10-21T21:47:51.678Z",
         "created": "2017-10-21T21:47:51.678Z",
         "tags": [],
-        "author": "Shashank",
-        "category": "Horror",
+        "author": "Admin",
+        "category": "Comedy",
         "isPublished": true,
         "views": 0,
-        "bodyHtml": "<h1>This is big text </h1> <p> Small text</p>",
-        "description": "This is the description of the example blog and this is an example blog",
+        "bodyHtml": "<h1>This is big text </h1> <p>Small text</p>",
+        "description": "This is the description of the example blog and this is edited",
         "title": "This is an example blog"
-  
-      },
-      {
+        },
+          {
         "blogId": "3",
         "lastModified": "2017-11-14T14:15:54.407Z",
         "created": "2017-11-14T14:15:54.407Z",
         "tags": [],
-        "author": "Shekhar",
-        "category": "Thriller",
+        "author": "Admin",
+        "category": "Comedy",
         "isPublished": true,
         "views": 0,
-        "bodyHtml": "this is the blog body. This is the blog body",
-        "description": "This is the description of the third blog",
-        "title": "This is the third blog"
-      }
-  
+        "bodyHtml": "this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. this is the blog body. ",
+        "description": "this is the third blog description",
+        "title": "this is the third blog"
+        }
     ]
   
-    public currentBlog;
-
-    constructor() { 
-
-      console.log("service constructor is called");
-      
-    }
-
-    //method to return all the blogs
-    public getAllBlogs():any {
-
+    constructor() { }
+    
+  
+    getBlogs() : any {
       return this.blogArray;
-
     }
-
-    //method to get a particular blog
-    public getSingleBlogInformation(currentBlogId): any {
-      //using a for of loop here for type script
   
-      for(let blog of this.blogArray){
-        if(blog.blogId == currentBlogId){
-          this.currentBlog = blog;
-        }
-      }
+    getSingleBlog(id) : any {
+       console.log("Get Single Blog")
+       console.log(id);
+       let blogId = id;
+       console.log(blogId);
+       let foundBlog;
+       for (let item of this.blogArray){
+          if((item.blogId) == blogId)
+              return item
+       }
+       
+      
   
-      console.log(this.currentBlog);
-      return this.currentBlog;
+       }// end get single blog
   
-    }// end get blog information function
-
-
+      
+    
   
-}
+  }
+  

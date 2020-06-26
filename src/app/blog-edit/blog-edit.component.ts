@@ -22,7 +22,7 @@ export class BlogEditComponent implements OnInit {
     let myBlogId = this._route.snapshot.paramMap.get('blogId');
     console.log(myBlogId)
     //this.currentBlog = this.blogService.getSingleBlog(myBlogId);
-    this.blogHttpService.getSingleBlogInformation(myBlogId).subscribe(
+    this.blogHttpService.getSingleBlog(myBlogId).subscribe(
 
       data => {
         console.log(data);

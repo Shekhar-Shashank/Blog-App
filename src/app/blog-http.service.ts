@@ -18,7 +18,7 @@ export class BlogHttpService {
   public allBlogs;
   //public currentBlog;
   public baseUrl = 'https://blogapp.edwisor.com/api/v1/blogs';
-  public authToken = 'NzlhZTQyZmU4NTFiY2QxZWQyNThjZjBhNDQ5OWQ2Y2QyNTkwMDY4YzdhNjg3MTFlNWFjYTNjNDEyZGI1NDljYzg0ZTk3NjdhOWQxNGE0OGQwY2ViOWFjMGQxZGE0N2ZiYmM3MGJkZmU4NmVhNDBlZTAxNGRiOTZkMWY2MGFhNjA2Mw==';
+  public authToken = 'NDQyNWMxOTNkMzg4ZmMxZDlkNjY4NzNkM2JmNGZmYzQzOTZhZWJmZDJmOWM5OTQ5Mzg3ZmI5M2EyNTg2OGFkMDRmNmM1YjQxZDE5ZmQ3OTNkMDA5Mzk0YTcxOWM2MWViZDdjOGIxOTY4NDExNTc4YzFlN2RkOTllN2IyZTU3N2NkOA==';
 
 
 
@@ -47,23 +47,21 @@ export class BlogHttpService {
   }
 
   //method to get a particular blog
-  public getSingleBlogInformation(currentBlogId): any {
+  getSingleBlog(blogId): any {
 
-    let myResponse = this._http.get(this.baseUrl + '/view' + '/' + currentBlogId + '?authToken=' + this.authToken );
+    let myResponse = this._http.get(this.baseUrl + '/view' + '/' + blogId + '?authToken=' + this.authToken)
     return myResponse;
 
+  }// end get single blog 
 
-  }// end get blog information function
-
-
-  public createBlog(blogData): any {
+  createBlog(blogData): any {
 
     let myResponse = this._http.post(this.baseUrl + '/create' + '?authToken=' + this.authToken, blogData)
     return myResponse;
 
   } // end create blog
 
-  public deleteBlog(blogId): any {
+  deleteBlog(blogId): any {
 
     let data = {}
     let myResponse = this._http.post(this.baseUrl + '/' + blogId + '/delete' + '?authToken=' + this.authToken, data)
@@ -71,13 +69,14 @@ export class BlogHttpService {
 
   }// end delete blog
 
-  public editBlog(blogId,blogData): any {
+  editBlog(blogId,blogData): any {
 
     
     let myResponse = this._http.put(this.baseUrl + '/' + blogId + '/edit' + '?authToken=' + this.authToken, blogData)
     return myResponse;
 
   }// end delete blog
+
 
 
 }
